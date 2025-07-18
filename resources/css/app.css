@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Merriweather', serif, 'Georgia', 'Times New Roman';
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
