@@ -1,14 +1,7 @@
  <x-layout >
  <p></p>
-            Welcome to the main content area. Replace this with your page-specific content.
-
-            You can use Tailwind CSS classes to style your content easily.
-
-            For example, you can add headings, paragraphs, buttons, and more using utility classes.
-
-            <a href="#" class="text-blue-500 hover:text-blue-700">Learn more</a> about how to use Tailwind CSS in your Laravel application.
-
-            You can also create components and layouts using Blade components, like this one:
+ <p>    Welcome to the main content area. Replace this with your page-specific content.</p>
+ <p>    You can use Tailwind CSS classes to style your content easily.</p>
 
 
      <x-demo></x-demo>
