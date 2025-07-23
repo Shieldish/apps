@@ -12,7 +12,7 @@
         <h1 class="text-3xl font-bold text-center mb-6">Post Details</h1>
         <div class="bg-white p-6 rounded-lg shadow-md">
 
-            <img src="<?php echo e($post->image ? asset('storage/' . $post->image) : asset('images/default-post.png')); ?>"
+            <img src="<?php echo e($post->image ? asset('storage/' . $post->image) : asset('storage/default-post.png')); ?>"
      alt="Post Image" class="w-full h-48 object-cover rounded-lg mb-4">
 
             <h2 class="text-2xl font-semibold text-blue-600"><?php echo e($post->title); ?></h2>

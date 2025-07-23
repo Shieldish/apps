@@ -77,7 +77,7 @@
                     </span>
                 </div>
 
-                <img src="<?php echo e($post->image ? asset('storage/' . $post->image) : asset('images/default-post.png')); ?>"
+                <img src="<?php echo e($post->image ? asset('storage/' . $post->image) : asset('storage/default-post.png')); ?>"
      alt="Post Image" class="w-full h-48 object-cover rounded-lg mb-4">
 
 
