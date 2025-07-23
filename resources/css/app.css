@@ -5,10 +5,7 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
-@theme {
-    --font-sans: 'Merriweather', serif, 'Georgia', 'Times New Roman';
-}
-
+@source '../**/*.css';
 
 @tailwind base;
 @tailwind components;

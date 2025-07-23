@@ -8,9 +8,12 @@
 
 
        <p class="text-center"> Hello, {{ auth()->user()->name }}! You are logged in.</p> 
-
-         </p>
-         <x-demo></x-demo>
+       </p>
+       
+                    <p class="text-gray-700 text-center text-lg">
+                       Last post bodie
+                    </p>
+       
      @endauth
 
      @guest

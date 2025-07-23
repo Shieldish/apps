@@ -90,6 +90,7 @@
     <main class="flex-1 container mx-auto p-4">
 
         {{ $slot }}
+        
     </main>
 
     <footer class="bg-white shadow p-4 mt-8">

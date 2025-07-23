@@ -43,7 +43,7 @@ class AuthController extends Controller
         
         Auth::login($user);
 
-        return redirect()->route('home');
+        return redirect()->route('login')->with('success', 'Registration successful. You are now logged in.');
     }
 
 
@@ -53,7 +53,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('home');
+        return redirect()->route('login')->with('success', 'You have been logged out successfully.');
     }
 }
 
