@@ -1,9 +1,36 @@
-<x-layout>
+<?php if (isset($component)) { $__componentOriginal23a33f287873b564aaf305a1526eada4 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal23a33f287873b564aaf305a1526eada4 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.layout','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
     <h1 class="text-3xl font-bold text-center mt-8 animate-fade-in-down">Bienvenue sur le tableau de bord</h1>
 
-    @if (session()->has('success'))
-        <x-flash message="{{ session('success') }}" type="success" bg="bg-green-200"></x-flash>
-    @endif
+    <?php if(session()->has('success')): ?>
+        <?php if (isset($component)) { $__componentOriginal5168fdb0c14fd91c6598264bc4be63f2 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal5168fdb0c14fd91c6598264bc4be63f2 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.flash','data' => ['message' => ''.e(session('success')).'','type' => 'success','bg' => 'bg-green-200']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('flash'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['message' => ''.e(session('success')).'','type' => 'success','bg' => 'bg-green-200']); ?> <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal5168fdb0c14fd91c6598264bc4be63f2)): ?>
+<?php $attributes = $__attributesOriginal5168fdb0c14fd91c6598264bc4be63f2; ?>
+<?php unset($__attributesOriginal5168fdb0c14fd91c6598264bc4be63f2); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal5168fdb0c14fd91c6598264bc4be63f2)): ?>
+<?php $component = $__componentOriginal5168fdb0c14fd91c6598264bc4be63f2; ?>
+<?php unset($__componentOriginal5168fdb0c14fd91c6598264bc4be63f2); ?>
+<?php endif; ?>
+    <?php endif; ?>
 
     <div class="dashboard flex flex-col md:flex-row gap-8 mt-8">
         <!-- Profil -->
@@ -15,8 +42,8 @@
                 </svg>
                 Profil
             </h2>
-            <p class="mb-2"><span class="font-medium">Nom :</span> {{ Auth::user()->name }}</p>
-            <p><span class="font-medium">Email :</span> {{ Auth::user()->email }}</p>
+            <p class="mb-2"><span class="font-medium">Nom :</span> <?php echo e(Auth::user()->name); ?></p>
+            <p><span class="font-medium">Email :</span> <?php echo e(Auth::user()->email); ?></p>
         </div>
 
         <!-- Statistiques -->
@@ -34,7 +61,8 @@
                         viewBox="0 0 24 24">
                         <path d="M19 21H5a2 2 0 01-2-2V7a2 2 0 012-2h4l2-2h4a2 2 0 012 2v12a2 2 0 01-2 2z" />
                     </svg>
-                    Articles publiés : {{ Auth::user()->posts->count() }}
+                    Articles publiés : <?php echo e(Auth::user()->posts->count()); ?>
+
                 </li>
                 <li class="flex items-center gap-2">
                     <svg class="w-5 h-5 text-pink-500" fill="none" stroke="currentColor" stroke-width="2"
@@ -58,7 +86,7 @@
                 </svg>
                 Actions rapides
             </h2>
-            <a href="{{ route('posts.create') }}"
+            <a href="<?php echo e(route('posts.create')); ?>"
                 class="btn inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition duration-200 animate-bounce">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path d="M12 4v16m8-8H4" />
@@ -146,17 +174,17 @@
     <div class="mt-8">
         <h2 class="text-3xl font-bold">Vos derniers articles</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-            @forelse ($posts as $post)
+            <?php $__empty_1 = true; $__currentLoopData = $posts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $post): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105">
-                    <a href="{{ route('posts.show', $post) }}" class="block">
-                        <img src="{{ $post->image ? asset('storage/' . $post->image) : asset('images/default-post.png') }}"
+                    <a href="<?php echo e(route('posts.show', $post)); ?>" class="block">
+                        <img src="<?php echo e($post->image ? asset('storage/' . $post->image) : asset('images/default-post.png')); ?>"
                             alt="Post Image" class="w-full h-48 object-cover rounded-lg mb-4">
-                        <h3 class="text-2xl font-semibold text-blue-600">{{ $post->title }}</h3>
-                        <p class="text-gray-700 mt-2">{{ Str::limit($post->content, 150) }}</p>
-                        <p class="text-gray-500 text-sm mt-4">Créé il y a {{ $post->created_at->diffForHumans() }}</p>
+                        <h3 class="text-2xl font-semibold text-blue-600"><?php echo e($post->title); ?></h3>
+                        <p class="text-gray-700 mt-2"><?php echo e(Str::limit($post->content, 150)); ?></p>
+                        <p class="text-gray-500 text-sm mt-4">Créé il y a <?php echo e($post->created_at->diffForHumans()); ?></p>
                     </a>
                     <div class="flex justify-end space-x-2 mt-4">
-                        <a href="{{ route('posts.edit', $post) }}" class="text-blue-500 hover:text-blue-700">
+                        <a href="<?php echo e(route('posts.edit', $post)); ?>" class="text-blue-500 hover:text-blue-700">
                             <svg class="w-5 h-5 inline" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path
@@ -166,11 +194,11 @@
                             Éditer
                         </a>
                         <!-- Bouton Supprimer -->
-                        <form method="POST" action="{{ route('posts.destroy', $post) }}" class="inline">
-                            @csrf
-                            @method('DELETE')
+                        <form method="POST" action="<?php echo e(route('posts.destroy', $post)); ?>" class="inline">
+                            <?php echo csrf_field(); ?>
+                            <?php echo method_field('DELETE'); ?>
                             <button type="submit" class="text-red-500 hover:text-red-700"
-                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer l\'article &quot;{{ addslashes($post->title) }}&quot; ? Cette action est irréversible.')">
+                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer l\'article &quot;<?php echo e(addslashes($post->title)); ?>&quot; ? Cette action est irréversible.')">
                                 <svg class="w-5 h-5 inline" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24">
                                     <path d="M6 18L18 6M6 6l12 12" />
@@ -180,16 +208,26 @@
                         </form>
                     </div>
                 </div>
-            @empty
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <p class="text-gray-700">Aucun article.</p>
                 </div>
-            @endforelse
+            <?php endif; ?>
         </div>
 
         <!-- Pagination -->
         <div class="mt-6">
-            {{ $posts->links() }}
+            <?php echo e($posts->links()); ?>
+
         </div>
     </div>
-</x-layout>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal23a33f287873b564aaf305a1526eada4)): ?>
+<?php $attributes = $__attributesOriginal23a33f287873b564aaf305a1526eada4; ?>
+<?php unset($__attributesOriginal23a33f287873b564aaf305a1526eada4); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal23a33f287873b564aaf305a1526eada4)): ?>
+<?php $component = $__componentOriginal23a33f287873b564aaf305a1526eada4; ?>
+<?php unset($__componentOriginal23a33f287873b564aaf305a1526eada4); ?>
+<?php endif; ?><?php /**PATH C:\Users\gabia\Desktop\Laravel\apps\resources\views/users/dashboard.blade.php ENDPATH**/ ?>

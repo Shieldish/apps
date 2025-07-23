@@ -1,15 +1,23 @@
 <x-layout>
-    <h1 class="text-3xl font-bold text-center mt-8 animate-fade-in-down bg-green-500 rounded-lg p-2 text-white shadow-lg w-fit mx-auto">
-        Bienvenue sur la page des posts de
-        <span class="animate-pulse">{{ $user->name }} :</span> <span class="animate-spin">{{ $posts->total() }} Postes</span>
-    </h1>
+    <h1
+    class="text-3xl font-bold text-center mt-8 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 
+           text-white rounded-xl p-4 shadow-2xl w-fit mx-auto animate-fade-in-down">
+    Bienvenue sur la page des posts de
+    <span class="ml-2 text-yellow-300 font-extrabold animate-pulse drop-shadow">
+        {{ $user->name }}
+    </span> :
+    <span class="ml-2 text-green-300 font-bold animate-spin-slow drop-shadow-lg">
+        {{ $posts->total() }} Postes
+    </span>
+</h1>
+
     <div class="max-w-4xl mx-auto mt-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse ($posts as $post)
                 <div class="p-6 border rounded-lg shadow hover:shadow-lg transition bg-white">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
-                            <img class="w-10 h-10 rounded-full" ">
+                            <img src="https://i.pravatar.cc/150?img={{ rand(1, 70) }}" alt="{{ $post->user->name }}" class="w-10 h-10 rounded-full">
                         </div>
                         <div class="ml-4">
                             <h2 class="text-lg font-semibold text-gray-800">{{ $post->user->name }}</h2>
@@ -17,6 +25,8 @@
                         </div>
                     </div>
                     <div class="mt-4">
+                        <img src="{{ $post->image ? asset('storage/' . $post->image) : asset('images/default-post.png') }}"
+                            alt="Post Image" class="w-full h-48 object-cover rounded-lg mb-4">
                         <h3 class="text-xl font-semibold text-blue-600">{{ $post->title }}</h3>
                         <p class="text-gray-700 mt-2">{{ Str::limit($post->content, 150) }}</p>
                         <p class="text-gray-500 text-sm mt-4">Créé il y a {{ $post->created_at->diffForHumans() }}</p>
@@ -26,7 +36,8 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24">
                                 <path
-                                    d="M11 17h2v2h-2v-2zm-3.5 0h2v2h-2v-2zm7 0h2v2h-2v-2zM4 7a2 2 0 002-2V3h12v4a2 2 0 01-2 2H6a2 2 0 01-2-2z">
+                                    d=" M11 17h2v2h-2v-2zm-3.5 0h2v2h-2v-2zm7 0h2v2h-2v-2zM4 7a2 2 0 002-2V3h12v4a2 2 0
+                                01-2 2H6a2 2 0 01-2-2z">
                                 </path>
                             </svg>
                             Éditer

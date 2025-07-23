@@ -48,6 +48,10 @@
                     </span>
                 </div>
 
+                <img src="{{ $post->image ? asset('storage/' . $post->image) : asset('images/default-post.png') }}"
+     alt="Post Image" class="w-full h-48 object-cover rounded-lg mb-4">
+
+
                 <h2 class="text-2xl font-semibold text-gray-800 mb-1">
                     {{ $post->title }}
                 </h2>

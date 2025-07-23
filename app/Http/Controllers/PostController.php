@@ -19,7 +19,7 @@ class PostController extends Controller implements HasMiddleware
     {
         return [
             'auth'
-            
+
         ];
     }
 
@@ -46,22 +46,30 @@ class PostController extends Controller implements HasMiddleware
     public function store(Request $request)
     {
 
-       Storage::disk('public')->put('images', $request->file('image'));
-        dd($request->file('image'));
-
 
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-     
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10048',
         ]);
+
+        $path = null;
+
+        if ($request->hasFile('image')) {
+            // Stocke le fichier dans storage/app/public/posts
+            $path = $request->file('image')->store('posts', 'public');
+
+            // Important : stocker le chemin relatif (ex: "posts/filename.jpg")
+            $validatedData['image'] = $path;
+        }
 
         Post::create([
             'title' => $validatedData['title'],
             'content' => $validatedData['content'],
+            'image' => $validatedData['image'] ?? null,  // Utilise le champ validé
             'user_id' => auth()->id(),
         ]);
+
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
